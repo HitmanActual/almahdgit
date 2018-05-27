@@ -7,6 +7,7 @@ use App\Doctor;
 use App\VisitType;
 use App\Visit;
 use Session;
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
@@ -20,6 +21,13 @@ class visitsController extends Controller
     public function index()
     {
         //
+        $keyword = Input::get('keyword');
+        if(isset($keyword)){
+            $visits = Visit::where('created_at', 'LIKE', "%$keyword%")->paginate(50000)->appends('created_at',$keyword);
+         }else{
+            $visits = Visit::orderBy('created_at','desc')->paginate(10);
+         }       
+        return view('visits.index')->withVisits($visits);
     }
 
     /**

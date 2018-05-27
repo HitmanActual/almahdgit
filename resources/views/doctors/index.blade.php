@@ -48,6 +48,6 @@
                 {!!$doctors->links();!!}
         </div>
             
-    </div>
+</div>
 
 @endsection
