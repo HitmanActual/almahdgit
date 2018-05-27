@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 {{Form::label('patientSex', 'Sex :')}}
-                {{Form::select('patientSex',[''=>'please select','male'=>'ذكر','female'=>'انثى'],null,['class'=>'form-control','required'=>'','minlength'=>'3','maxlength'=>'4'])}}
+                {{Form::select('patientSex',[''=>'please select','male'=>'ذكر','female'=>'انثى'],null,['class'=>'form-control','required'=>''])}}
             </div>
 
             <div class="form-group">
@@ -42,12 +42,12 @@
 
             <div class="form-group">
                     {{Form::label('phoneOne', 'Mobile No.1')}}
-                    {{Form::text('phoneOne',null,['class'=>'form-control','required'=>'','minlength'=>'11','maxlength'=>'11'])}}
+                    {{Form::text('phoneOne',null,['class'=>'form-control','required'=>'','minlength'=>'10','maxlength'=>'11'])}}
             </div>
 
             <div class="form-group">
                     {{Form::label('phoneTwo', 'Mobile No.2')}}
-                    {{Form::text('phoneTwo',null,['class'=>'form-control','minlength'=>'11','maxlength'=>'11','data-parsley-type'=>'integer'])}}
+                    {{Form::text('phoneTwo',null,['class'=>'form-control','minlength'=>'10','maxlength'=>'11','data-parsley-type'=>'integer'])}}
             </div>
 
             <div class="form-group">

@@ -91,7 +91,7 @@
                     <td>{{ \Carbon\Carbon::parse($visit->created_at)->format('d/m/Y')}}</td>
                     <td>
                     <a href="{{route('visits.edit',$visit->id)}}" class="btn btn-xs btn-info"><span class="fa fa-pencil"></span></a>
-                        <a href="#" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></a>
+                    <a href="{{route('visits.delete',$visit->id)}}" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></a>
                     </td>
              
                     </tr> 

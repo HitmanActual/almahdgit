@@ -35,10 +35,10 @@ Route::get('/clinic_patient/{patient_id}',[
 Route::get('visits/patient/{patient_id}',['uses'=>'visitsController@patient_visit','as'=>'visit']);
 //patient visits
 Route::post('visits/{patient_id}',['uses'=>'visitsController@store','as'=>'visits.store']);
-Route::get('visits/{id}',['uses'=>'visitsController@show','as'=>'visits.show']);
 Route::get('visits/{id}/edit',['uses'=>'visitsController@edit','as'=>'visits.edit']);
 Route::put('visits/{id}',['uses'=>'visitsController@update','as'=>'visits.update']);
 Route::delete('visits/{id}',['uses'=>'visitsController@destroy','as'=>'visits.destroy']);
+Route::get('visits/{id}/delete',['uses'=>'visitsController@delete','as'=>'visits.delete']);
 
 
 

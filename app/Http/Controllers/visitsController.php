@@ -81,14 +81,20 @@ class visitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($visit_id)
+    public function edit($id)
     {
-        $clinics = Clinic::all();// generate clinci drop downlist dynamiclly
+        $visit = Visit::findOrFail($id);
 
-        $visit = Visit::findOrFail($visit_id);
         $visitTypes = VisitType::all();
-        return view('visits.edit')->withVisit($visit)->withClinics($clinics)
-        ->withVisitTypes($visitTypes);
+        $visitTypesLooper = [];
+        
+        foreach($visitTypes as $visitType){
+
+            $visitTypesLooper[$visitType->id] = $visitType->visitName;
+        }
+        
+        return view('visits.edit')->withVisit($visit)->withVisitTypes($visitTypesLooper);
+        
     }
 
     /**
@@ -101,6 +107,12 @@ class visitsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $visit = Visit::findOrFail($id);
+        $visit->visitType_id = $request->visitType_id;
+        $visit->price = $request->price;
+        $visit->save();
+        return redirect()->route('patients.show',$visit->Patients->id);
+
     }
 
     /**
@@ -109,9 +121,18 @@ class visitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
+        $visit = Visit::findOrFail($id);
+        return view('visits.delete')->withVisit($visit);
+    }
+
+    public function destroy($id){
+        $visit = Visit::findOrFail($id);
+        $visit->delete();
+        return redirect()->route('patients.show',$visit->Patients->id);
+        
     }
 
 
