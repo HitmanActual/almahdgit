@@ -1,14 +1,22 @@
 <?php
 
 namespace App;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Doctor extends Model
+class Doctor extends Authenticatable
 {
+    use Notifiable;
+    protected $guard = 'doctor';
     //
     protected $fillable = [
-        'doctorName', 'phoneOne', 'phoneTwo','notes','level_id','clinic_id',
+        'doctorName', 'phoneOne', 'phoneTwo','notes','level_id','clinic_id','email','password',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     

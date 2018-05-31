@@ -23,7 +23,7 @@ class visitsController extends Controller
         //
         $keyword = Input::get('keyword');
         if(isset($keyword)){
-            $visits = Visit::where('created_at', 'LIKE', "%$keyword%")->paginate(50000)->appends('created_at',$keyword);
+            $visits = Visit::where('created_at', 'LIKE', "%$keyword%")->paginate(5000)->appends('created_at',$keyword);
          }else{
             $visits = Visit::orderBy('created_at','desc')->paginate(10);
          }       

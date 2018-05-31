@@ -25,6 +25,7 @@
         <table class="table table-hover">
             <thead>
                 <th>Clinic</th>
+                <th>Patient</th>
                 <th>Doctor</th>                
                 <th>نوع الكشف</th>  
                 <th>Price</th>                                              
@@ -35,6 +36,7 @@
                 @foreach ($visits as $visit)
                     <tr>
                     <td>{{$visit->clinics->clinicName}}</td>
+                    <td>{{$visit->patients->patientName}}</td>
                     <td>{{$visit->doctors->doctorName}}</td>
                     <td>{{$visit->visitTypes->visitName}}</td>
                     <td>{{$visit->price}}</td>

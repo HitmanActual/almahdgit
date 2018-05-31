@@ -57,3 +57,17 @@ Route::get('clinicDoctors',[
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('physician')->group(function(){
+
+    Route::get('/login','Auth\physicianLoginController@showLoginForm')->name('physician.login');
+    Route::post('/login','Auth\physicianLoginController@login')->name('physician.login.submit');
+
+    Route::get('/', 'physicianController@index')->name('physician.dashboard');
+});
+
