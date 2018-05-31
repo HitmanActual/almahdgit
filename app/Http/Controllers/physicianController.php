@@ -25,4 +25,9 @@ class physicianController extends Controller
     {
         return view('physician');
     }
+
+    public function we()
+    {
+        return view('physician_we');
+    }
 }

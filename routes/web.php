@@ -69,5 +69,6 @@ Route::prefix('physician')->group(function(){
     Route::post('/login','Auth\physicianLoginController@login')->name('physician.login.submit');
 
     Route::get('/', 'physicianController@index')->name('physician.dashboard');
+    Route::get('/we', 'physicianController@we')->name('physician_we.dashboard');
 });
 

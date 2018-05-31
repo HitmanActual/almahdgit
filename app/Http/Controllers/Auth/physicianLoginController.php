@@ -30,6 +30,10 @@ class physicianLoginController extends Controller
             //if susscess then redirect to the intended location
             return redirect()->intended(route('physician.dashboard'));
         }
+        if(Auth::guard('doctor')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>6],$request->remember)){
+            //if susscess then redirect to the intended location
+            return redirect()->intended(route('physician_we.dashboard'));
+        }
     
         //if unsussessfull redirect back
         return redirect()->back()->withInput($request->only('email','remember'));
