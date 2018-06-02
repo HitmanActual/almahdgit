@@ -9,6 +9,7 @@ use Session;
 
 class ClinicController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

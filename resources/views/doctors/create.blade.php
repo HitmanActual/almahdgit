@@ -22,6 +22,16 @@
             </div>
 
             <div class="form-group">
+                {{Form::label('email', 'Login Email')}}
+                {{Form::text('email',null,['class'=>'form-control','required'=>'','maxlength'=>'255'])}}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('password', 'Password')}}
+                {{Form::password('password',['class'=>'form-control','required'=>'','maxlength'=>'255'])}}
+            </div>
+
+            <div class="form-group">
                     {{Form::label('clinic_id', 'Clinic')}}
                     <select class="form-control" name="clinic_id" id="">
                             <option value="" selected disabled>Select Clinic</option>

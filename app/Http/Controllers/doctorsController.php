@@ -7,6 +7,7 @@ use App\Doctor;
 use App\Level;
 use App\Clinic;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class doctorsController extends Controller
 {
@@ -61,6 +62,9 @@ class doctorsController extends Controller
         $doctor->notes= $request->notes;
         $doctor->level_id = $request->level_id;
         $doctor->clinic_id = $request->clinic_id;
+        $doctor->email = $request->email;
+        $doctor->password = Hash::make($request->password);
+
         $doctor->save();
         
         Session::flash('add_doctor_success','a doctor has been added successfully');

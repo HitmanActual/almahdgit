@@ -11,6 +11,8 @@ use Session;
 
 class patientsController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +52,7 @@ class patientsController extends Controller
             'patientName'=>'required|max:255',
             'patientSex'=>'required',
             'dob'=>'required',
-            'phoneOne'=>'required|numeric',           
+            'phoneOne'=>'required',           
         ]);
 
         $patient = new Patient;
@@ -64,7 +66,8 @@ class patientsController extends Controller
         $patient->clinics()->sync($request->clinics,false);
         Session::flash('add_patient_success','a patient has been added successfully');
         //redirect
-        return view('patients.show')->withPatient($patient);
+        //return view('patients.show')->withPatient($patient);
+        return redirect()->route('patients.show',$patient->id);
 
         
 
@@ -79,6 +82,7 @@ class patientsController extends Controller
     public function show($id)
     {
         //
+        $counter = 0;
         $patient = Patient::findOrFail($id);
         //--visit history
         $visits = Visit::where('patients_id',$id)->orderBy('id', 'desc')->get();
@@ -121,7 +125,7 @@ class patientsController extends Controller
             'patientName'=>'required|max:255',
             'patientSex'=>'required',
             'dob'=>'required',
-            'phoneOne'=>'required|numeric',           
+            'phoneOne'=>'required',           
         ]);
 
         $patient = Patient::findOrFail($id);

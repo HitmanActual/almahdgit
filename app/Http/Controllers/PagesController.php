@@ -10,6 +10,7 @@ class PagesController extends Controller
     //return static pages
     public function getIndex(){
 
-        return view('pages.welcome',compact('clinics'));
+        return view('pages.welcome');
+        //return view('pages.welcome',compact('clinics'));
     }
 }

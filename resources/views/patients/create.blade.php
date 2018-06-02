@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 {{Form::label('patientSex', 'Sex :')}}
-                {{Form::select('patientSex',[''=>'please select','male'=>'ذكر','female'=>'انثى'],null,['class'=>'form-control','required'=>'','minlength'=>'3','maxlength'=>'4'])}}
+                {{Form::select('patientSex',[''=>'please select','male'=>'ذكر','female'=>'انثى'],null,['class'=>'form-control','required'=>''])}}
             </div>
 
             <div class="form-group">
