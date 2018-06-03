@@ -21,6 +21,13 @@ class CreateVisitsTable extends Migration
             $table->decimal('price', 15, 2)->unsigned()->default(0);
             $table->timestamps();
         });
+
+        Schema::table('visits', function($table) {
+            $table->foreign('visitType_id')->references('id')->on('visit_types');
+            $table->foreign('patients_id')->references('id')->on('patients');
+            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+        });
     }
 
     /**

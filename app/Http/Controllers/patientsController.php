@@ -7,6 +7,9 @@ use App\Patient;
 use App\Clinic;
 use App\Visit;
 use Session;
+use Image;
+use Storage;
+
 
 
 class patientsController extends Controller
@@ -52,7 +55,8 @@ class patientsController extends Controller
             'patientName'=>'required|max:255',
             'patientSex'=>'required',
             'dob'=>'required',
-            'phoneOne'=>'required',           
+            'phoneOne'=>'required',
+            'image'=>'sometimes|mimes:jpeg,jpg,pdf,png,zip',           
         ]);
 
         $patient = new Patient;
@@ -62,6 +66,23 @@ class patientsController extends Controller
         $patient->phoneOne = $request->phoneOne;
         $patient->phoneTwo = $request->phoneTwo;
         $patient->patientAddress = $request->patientAddress;
+
+        if($request->hasFile('image')){
+
+            //--grab the request
+            $image = $request->file('image');
+            //--create a fileName
+            $fileName = time().'.'.$image->getClientOriginalName();
+            //save location
+            $location = storage_path('/app/public/images/');
+            //resize and save the image
+           // Image::make($image)->resize(600,800)->save($location);
+            $image->move($location,$fileName);
+            //store the image file name in the image column
+            $patient->image = $fileName;
+        }
+
+
         $patient->save();
         $patient->clinics()->sync($request->clinics,false);
         Session::flash('add_patient_success','a patient has been added successfully');
@@ -88,7 +109,11 @@ class patientsController extends Controller
         $visits = Visit::where('patients_id',$id)->orderBy('id', 'desc')->get();
         $counter = Visit::where('patients_id',$id)->count();
 
-        return view('patients.show')->withPatient($patient)->withVisits($visits)->withCounter($counter);
+        //-get uploaded image
+        
+
+        return view('patients.show')->withPatient($patient)
+        ->withVisits($visits)->withCounter($counter);
     }
 
     /**
@@ -125,7 +150,8 @@ class patientsController extends Controller
             'patientName'=>'required|max:255',
             'patientSex'=>'required',
             'dob'=>'required',
-            'phoneOne'=>'required',           
+            'phoneOne'=>'required', 
+            'image'=>'sometimes|mimes:jpeg,jpg,pdf,png,zip',           
         ]);
 
         $patient = Patient::findOrFail($id);
@@ -135,6 +161,29 @@ class patientsController extends Controller
         $patient->phoneOne = $request->phoneOne;
         $patient->phoneTwo = $request->phoneTwo;
         $patient->patientAddress = $request->patientAddress;
+
+        if($request->hasFile('image')){
+
+            //--grab the request
+            $image = $request->file('image');
+            //--create a fileName
+            $fileName = time().'.'.$image->getClientOriginalName();
+            //save location
+            $location = storage_path('/app/public/images/');
+            //resize and save the image
+           // Image::make($image)->resize(600,800)->save($location);
+            $image->move($location,$fileName);
+            //update the image file name in the image column
+
+            $oldFileName = $patient->image;
+            //--update the database
+            $patient->image = $fileName; 
+
+            //--delete the old image
+            Storage::delete($oldFileName);
+        }
+
+
         $patient->save();
         $patient->clinics()->sync($request->clinics,true);
         Session::flash('add_patient_success','a patient has been added successfully');
@@ -153,6 +202,7 @@ class patientsController extends Controller
         //
         $patient = Patient::find($id);
         $patient->clinics()->detach();
+        Storage::delete($patient->image);
         $patient->delete();
         Session::flash('remove_patient_success','a Patient has been successfully removed');
         return redirect()->route('patients.index');
@@ -166,6 +216,13 @@ class patientsController extends Controller
         //
         $clinic = Clinic::findOrFail($id);        
         return view('patients.clinic_patient')->withClinic($clinic);
+    }
+
+    //--get patient's uploaded file from storage directory
+    public function docs($id){
+        $patient = Patient::findOrFail($id);
+        return response()->download(storage_path('app/public/images/'.$patient->image,$patient));
+
     }
 
 

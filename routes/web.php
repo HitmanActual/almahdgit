@@ -34,6 +34,9 @@ Route::group(['middleware'=>['auth']],function(){
         'as'=>'clinic_patients'
     ]);
 
+    //-for security concern get uploaded image from storage NOT THE PUBLIC directory
+    Route::get('/docs/{id}','patientsController@docs');
+
 
     //--assign a visit to a specific patient
     Route::get('visits/patient/{patient_id}',['uses'=>'visitsController@patient_visit','as'=>'visit']);

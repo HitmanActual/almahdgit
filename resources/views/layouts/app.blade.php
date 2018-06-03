@@ -34,8 +34,44 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+            <li class="{{Request::is('/')?"active":""}}">
+                    <a class="nav-link" href="/visits/">اليومية</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/clinics">العيادات</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                الأطباء
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                
+                <a class="dropdown-item" href="/doctors/create">طبيب جديد</a>
+                <div class="dropdown-divider"></div>  
+                <a class="dropdown-item" href="/doctors">عرض الأطباء</a>
+                
+                            
+                </div>
+            </li>
 
-                    </ul>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    المرضى
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                    
+                    <a class="dropdown-item" href="/patients/create">مريض جديد</a>
+                    <div class="dropdown-divider"></div>  
+                    <a class="dropdown-item" href="/patients">عرض المرضى</a>
+                    
+                                
+                    </div>
+                </li>
+
+        
+        </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

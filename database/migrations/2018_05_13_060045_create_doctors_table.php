@@ -25,6 +25,11 @@ class CreateDoctorsTable extends Migration
            // $table->foreign('clinic_id')->reference('id')->on('clinics')->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::table('doctors', function($table) {
+            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('level_id')->references('id')->on('levels');
+        });
     }
 
     /**

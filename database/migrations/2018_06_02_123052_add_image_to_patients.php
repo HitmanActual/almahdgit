@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAuthColumnsToDoctorsTable extends Migration
+class AddImageToPatients extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class AddAuthColumnsToDoctorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('doctors', function (Blueprint $table) {
+        Schema::table('patients', function (Blueprint $table) {
             //
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('image')->nullable()->after('notes');
         });
     }
 
@@ -28,7 +26,7 @@ class AddAuthColumnsToDoctorsTable extends Migration
      */
     public function down()
     {
-        Schema::table('doctors', function (Blueprint $table) {
+        Schema::table('patients', function (Blueprint $table) {
             //
         });
     }

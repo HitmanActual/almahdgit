@@ -19,6 +19,11 @@ class CreateClinicPatientTable extends Migration
             $table->integer('patient_id')->unsigned();
             $table->timestamps();
         });
+
+        Schema::table('clinic_patient', function($table) {
+            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('patient_id')->references('id')->on('patients');
+        });
     }
 
     /**

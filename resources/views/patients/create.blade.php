@@ -17,7 +17,7 @@
         <div class="card card-body bg-light">
         <h1>Add a Patient</h1>
         <hr>
-        {!! Form::open(['route' => 'patients.store','data-parsley-validate'=>'']) !!}
+        {!! Form::open(['route' => 'patients.store','data-parsley-validate'=>'','files'=>true]) !!}
     
             <div class="form-group">
             {{Form::label('patientName', 'Patient Name')}}
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 {{Form::label('dob', 'Date of Birth:')}}
-                {{Form::text('dob',null,['id'=>'datepicker'],['class'=>'form-control','required'=>'','maxlength'=>'255'])}}
+                {{Form::text('dob',null,['id'=>'datepicker','class'=>'form-control','required'=>'','maxlength'=>'255'])}}
             </div>
 
             <div class="form-group">
@@ -57,6 +57,12 @@
             <div class="form-group">
                     {{Form::label('patientAddress', 'Address')}}
                     {{Form::text('patientAddress',null,['class'=>'form-control','required'=>'','maxlength'=>'255'])}}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('image', 'Previous History (Scanned) image')}}
+                <br>
+                {{Form::file('image',['class'=>' btn btn-info'])}}
             </div>
 
             <div class="form-group">

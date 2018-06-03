@@ -60,7 +60,12 @@
             <hr>
             <div class="row">
                     <div class="col-md-12">
-                            <a href="/patients" class="btn btn-outline-dark btn-block">عرض كل المرضى</a>
+                        
+                        @if($patient->image)
+                        <a href="/docs/{{$patient->id}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
+                        @else
+                        <p>Nothing to be downloaded</p>
+                        @endif
                     </div>
             </div>
         </div>
@@ -100,5 +105,6 @@
         </table>
     </div>
 </div>
+<hr>
 
 @endsection
