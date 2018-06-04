@@ -9,6 +9,7 @@ use App\Visit;
 use Session;
 use Image;
 use Storage;
+use Illuminate\Support\Facades\Input;
 
 
 
@@ -24,7 +25,21 @@ class patientsController extends Controller
     public function index()
     {
         //
-        $patients = Patient::orderBy('id','desc')->paginate(10);
+        $keyword = Input::get('keyword');
+        $searchFields = ['phoneOne','phoneTwo'];
+        if(isset($keyword)){
+
+
+            $patients = Patient::where('phoneOne', 'LIKE', "%$keyword%")
+            ->orWhere('phoneTwo', 'LIKE', "%$keyword%")
+            ->orWhere('patientName', 'LIKE', "%$keyword%")
+            ->paginate(5000)->appends('created_at',$keyword);
+
+            
+         }else{
+            $patients = Patient::orderBy('created_at','desc')->paginate(10);
+         }       
+        
         return view('patients.index')->withPatients($patients);
     }
 

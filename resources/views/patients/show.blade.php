@@ -90,7 +90,7 @@
                 @foreach ($visits as $visit)
                     <tr>
                     <td>{{$visit->clinics->clinicName}}</td>
-                    <td>{{$visit->doctors->doctorName}}</td>
+                    <td><a href="{{route('doctors.show',$visit->doctors->id)}}">{{$visit->doctors->doctorName}}</a> </td>
                     <td>{{$visit->visitTypes->visitName}}</td>
                     <td>{{$visit->price}}</td>
                     <td>{{ \Carbon\Carbon::parse($visit->created_at)->format('d/m/Y')}}</td>

@@ -7,6 +7,7 @@ use App\Doctor;
 use App\Level;
 use App\Clinic;
 use Session;
+use App\Visit;
 use Illuminate\Support\Facades\Hash;
 
 class doctorsController extends Controller
@@ -85,7 +86,11 @@ class doctorsController extends Controller
     {
         //
         $doctor = Doctor::findOrFail($id);
-        return view('doctors.show')->withDoctor($doctor);
+
+        //--doctor's visits
+        $visits = Visit::where('doctor_id',$id)->orderBy('id', 'desc')->get();
+        $counter = Visit::where('doctor_id',$id)->count();
+        return view('doctors.show')->withDoctor($doctor)->withVisits($visits)->withCounter($counter);
     }
 
     /**
