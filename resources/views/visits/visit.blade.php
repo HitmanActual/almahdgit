@@ -22,7 +22,7 @@
             <hr>
             <!--the visit form-->
 
-            {!! Form::open(['route' => ['visits.store',$patient->id],'data-parsley-validate'=>'']) !!}
+            {!! Form::open(['route' => ['visits.store',$patient->id],'data-parsley-validate'=>'','files'=>true]) !!}
             <div class="form-group">
                 <select class="form-control" name="clinic_id" id="clinics"> 
                     <option value="" disabled selected>please select the clinic</option>                  
@@ -38,6 +38,13 @@
                                  
                 </select>
             </div>
+
+            <div class="form-group">
+                {{Form::label('image', 'jpeg,png,pdf,zip are only allowed')}}
+                <br>
+                {{Form::file('image',['class'=>' btn btn-info'])}}
+            </div>
+
 
             <div class="form-group mt-5">
                     <select class="form-control" name="visitType_id" id="visitTypes"> 

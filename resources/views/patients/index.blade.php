@@ -46,5 +46,11 @@
 </div>
 
 
+<div class="row">
+    <div class="mx-auto">
+            {!!$patients->links();!!}
+    </div>
+        
+</div>
 
 @endsection

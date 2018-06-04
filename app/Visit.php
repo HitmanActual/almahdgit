@@ -9,7 +9,7 @@ class Visit extends Model
     //
         //mass assignment
         protected $fillable = [
-            'clinic_id','patient_id','visitType_id','price','doctor_id',
+            'clinic_id','patient_id','visitType_id','price','doctor_id','image',
         ];
         
         // one2many relationship

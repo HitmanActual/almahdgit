@@ -108,8 +108,6 @@ class patientsController extends Controller
         //--visit history
         $visits = Visit::where('patients_id',$id)->orderBy('id', 'desc')->get();
         $counter = Visit::where('patients_id',$id)->count();
-
-        //-get uploaded image
         
 
         return view('patients.show')->withPatient($patient)

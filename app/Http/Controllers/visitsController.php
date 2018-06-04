@@ -8,6 +8,7 @@ use App\VisitType;
 use App\Visit;
 use Session;
 use Illuminate\Support\Facades\Input;
+use Storage;
 
 use Illuminate\Http\Request;
 
@@ -54,7 +55,8 @@ class visitsController extends Controller
             'clinic_id'=>'required|numeric',
             'visitType_id'=>'required|numeric',           
             'doctor_id'=>'required|numeric',
-            'price'=>'required|numeric',           
+            'price'=>'required|numeric',
+            'image'=>'sometimes|mimes:jpeg,jpg,pdf,png,zip',           
         ]);
         //store
         $patient = Patient::find($patient_id);
@@ -64,6 +66,22 @@ class visitsController extends Controller
         $visit->price = $request->price;
         $visit->doctor_id = $request->doctor_id;
         $visit->patients()->associate($patient);
+
+        if($request->hasFile('image')){
+
+            //--grab the request
+            $image = $request->file('image');
+            //--create a fileName
+            $fileName = time().'.'.$image->getClientOriginalName();
+            //save location
+            $location = storage_path('/app/public/images/');
+            //resize and save the image
+           // Image::make($image)->resize(600,800)->save($location);
+            $image->move($location,$fileName);
+            //store the image file name in the image column
+            $visit->image = $fileName;
+        }
+        
         $visit->save();
 
         Session::flash('add_visit_success','a visit has been added successfully');
@@ -80,6 +98,8 @@ class visitsController extends Controller
     public function show($id)
     {
         //
+        $visit = Visit::findOrFail($id);
+        return view('visits.show')->withVisit($visit);
         
     }
 
@@ -118,6 +138,28 @@ class visitsController extends Controller
         $visit = Visit::findOrFail($id);
         $visit->visitType_id = $request->visitType_id;
         $visit->price = $request->price;
+
+        if($request->hasFile('image')){
+
+            //--grab the request
+            $image = $request->file('image');
+            //--create a fileName
+            $fileName = time().'.'.$image->getClientOriginalName();
+            //save location
+            $location = storage_path('/app/public/images/');
+            //resize and save the image
+           // Image::make($image)->resize(600,800)->save($location);
+            $image->move($location,$fileName);
+            //update the image file name in the image column
+
+            $oldFileName = $visit->image;
+            //--update the database
+            $visit->image = $fileName; 
+
+            //--delete the old image
+            Storage::delete($oldFileName);
+        }
+
         $visit->save();
         return redirect()->route('patients.show',$visit->Patients->id);
 
@@ -138,6 +180,7 @@ class visitsController extends Controller
 
     public function destroy($id){
         $visit = Visit::findOrFail($id);
+        Storage::delete($visit->image);
         $visit->delete();
         return redirect()->route('patients.show',$visit->Patients->id);
         
@@ -158,6 +201,12 @@ class visitsController extends Controller
 
         $data = Doctor::select('doctorName','id')->where('clinic_id',$req->id)->get();
         return response()->json($data);
+    }
+
+    public function docs($id){
+        $visit = Visit::findOrFail($id);
+        return response()->download(storage_path('app/public/images/'.$visit->image,$visit));
+
     }
 
 

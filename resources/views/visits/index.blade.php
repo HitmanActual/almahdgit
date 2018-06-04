@@ -4,6 +4,9 @@
 @section('stylesheets')
 
     {!!Html::style('//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css') !!}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     
 @endsection
 
@@ -14,7 +17,7 @@
             <form class="form-inline my-2 my-lg-0 ">
                     <input class="form-control mr-sm-2" id="datepicker" name="keyword" type="search" placeholder="Search By Date" aria-label="Search">
                     <button class="btn btn-outline-info my-2 my-sm-0 mr-2" type="submit">Find</button>
-                    <a href="/visits" class="btn btn-outline-dark my-2 my-sm-0">Reset Search</a>
+                    <a href="/visits" class="btn btn-outline-warning my-2 my-sm-0">Reset Search</a>
             </form>
            
     </div>
@@ -30,6 +33,7 @@
                 <th>نوع الكشف</th>  
                 <th>Price</th>                                              
                 <th>Created at</th>
+                <th>Details</th>
                 
             </thead>
             <tbody>
@@ -40,7 +44,8 @@
                     <td>{{$visit->doctors->doctorName}}</td>
                     <td>{{$visit->visitTypes->visitName}}</td>
                     <td>{{$visit->price}}</td>
-                    <td>{{ \Carbon\Carbon::parse($visit->created_at)->format('d/m/Y')}}</td>                        
+                    <td>{{ \Carbon\Carbon::parse($visit->created_at)->format('d/m/Y')}}</td> 
+                    <td><a href="{{route('visits.show',$visit->id)}}" class="btn btn-xs btn-outline-dark"><span class="fa fa-eye"></span></a></td>                       
                     </tr> 
                 @endforeach
             </tbody>

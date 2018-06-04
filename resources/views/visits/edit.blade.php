@@ -11,10 +11,16 @@
         <p><strong>Clinic :</strong> {{$visit->clinics->clinicName}}</p>
         <p><strong>Doctor :</strong> {{$visit->doctors->doctorName}}</p>
 
-        {{Form::model($visit,['route'=>['visits.update',$visit->id],'method'=>'PUT'])}}
+        {{Form::model($visit,['route'=>['visits.update',$visit->id],'method'=>'PUT','files'=>true])}}
 
         <div class="form-group">
         {{Form::select('visitType_id',$visitTypes,null,['class'=>'form-control','id'=>'visitTypes'])}}  
+        </div>
+
+        <div class="form-group">
+                {{Form::label('image', 'Update Previously uploaded file')}}
+                <br>
+                {{Form::file('image',['class'=>' btn btn-info'])}}
         </div>
                 
         <div class="form-group">

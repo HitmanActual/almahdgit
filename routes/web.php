@@ -37,12 +37,15 @@ Route::group(['middleware'=>['auth']],function(){
     //-for security concern get uploaded image from storage NOT THE PUBLIC directory
     Route::get('/docs/{id}','patientsController@docs');
 
+   
+
 
     //--assign a visit to a specific patient
     Route::get('visits/patient/{patient_id}',['uses'=>'visitsController@patient_visit','as'=>'visit']);
     //patient visits
 
     Route::post('visits/{patient_id}',['uses'=>'visitsController@store','as'=>'visits.store']);
+    Route::get('visits/{id}/show',['uses'=>'visitsController@show','as'=>'visits.show']);
     Route::get('visits/{id}/edit',['uses'=>'visitsController@edit','as'=>'visits.edit']);
     Route::put('visits/{id}',['uses'=>'visitsController@update','as'=>'visits.update']);
     Route::delete('visits/{id}',['uses'=>'visitsController@destroy','as'=>'visits.destroy']);
@@ -50,7 +53,7 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::get('visits',['uses'=>'visitsController@index','as'=>'visits.index']);
 
-
+    Route::get('/visit_doc/{id}','visitsController@docs');
 
     //--fetch doctors based on selected clinic when visit occur
     Route::get('clinicDoctors',[
