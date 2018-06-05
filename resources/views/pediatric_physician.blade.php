@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in as Physician!
+                    You are logged in as Pediatric Physician!
                 </div>
             </div>
         </div>

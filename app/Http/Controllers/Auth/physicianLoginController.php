@@ -9,9 +9,9 @@ use Auth;
 class physicianLoginController extends Controller
 {
     //
-    public function __construct(){
-        $this->middleware('guest:doctor');
-    }
+    /*public function __construct(){
+        $this->middleware('guest:pediatric');
+    }*/
 
     public function showLoginForm(){
         return view('auth.physician-login');
@@ -26,13 +26,13 @@ class physicianLoginController extends Controller
         ]);
 
         //attepmt to log the physician in based on clinic Id too
-        if(Auth::guard('doctor')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>1],$request->remember)){
+        if(Auth::guard('pediatric')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>1],$request->remember)){
             //if susscess then redirect to the intended location
-            return redirect()->intended(route('physician.dashboard'));
+            return redirect()->intended(route('pediatric.dashboard'));
         }
-        if(Auth::guard('doctor')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>6],$request->remember)){
+        if(Auth::guard('orthopedic')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>2],$request->remember)){
             //if susscess then redirect to the intended location
-            return redirect()->intended(route('physician_we.dashboard'));
+            return redirect()->intended(route('orthopedic.dashboard'));
         }
     
         //if unsussessfull redirect back

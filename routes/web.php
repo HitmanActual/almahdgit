@@ -81,7 +81,14 @@ Route::prefix('physician')->group(function(){
     Route::get('/login','Auth\physicianLoginController@showLoginForm')->name('physician.login');
     Route::post('/login','Auth\physicianLoginController@login')->name('physician.login.submit');
 
-    Route::get('/', 'physicianController@index')->name('physician.dashboard');
-    Route::get('/we', 'physicianController@we')->name('physician_we.dashboard');
+    Route::group(['middleware' =>'auth:pediatric'], function () {
+        Route::get('/pediatric', 'pediatricPhysicianController@index')->name('pediatric.dashboard');
+    });
+
+    
+    Route::group(['middleware' =>'auth:orthopedic'], function () {
+
+    Route::get('/orthopedic', 'orthopedicPhysicianController@index')->name('orthopedic.dashboard');
+    });
 });
 

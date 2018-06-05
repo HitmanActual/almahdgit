@@ -19,9 +19,15 @@ class RedirectIfAuthenticated
     {
         switch($guard){
 
-            case 'doctor':
+            case 'pediatric':
             if(Auth::guard($guard)->check()){
-                return redirect()->route('physician.dashboard');
+                return redirect()->route('pediatric.dashboard');
+            }
+            break;
+
+            case 'orthopedic':
+            if(Auth::guard($guard)->check()){
+                return redirect()->route('orthopedic.dashboard');
             }
             break;
 
