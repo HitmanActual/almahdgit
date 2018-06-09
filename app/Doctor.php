@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Authenticatable
 {
     use Notifiable;
-    protected $guard = 'doctor';
+    //protected $guard = 'doctor';
     //
     protected $fillable = [
         'doctorName', 'phoneOne', 'phoneTwo','notes','level_id','clinic_id','email','password',

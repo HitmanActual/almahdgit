@@ -83,6 +83,8 @@ Route::prefix('physician')->group(function(){
 
     Route::group(['middleware' =>'auth:pediatric'], function () {
         Route::get('/pediatric', 'pediatricPhysicianController@index')->name('pediatric.dashboard');
+        Route::get('pediatric_patient/{id}/show',['uses'=>'pediatricPhysicianController@show','as'=>'pediatric_patient.show']);
+
     });
 
     
