@@ -82,12 +82,23 @@ Route::prefix('physician')->group(function(){
     Route::post('/login','Auth\physicianLoginController@login')->name('physician.login.submit');
 
     Route::group(['middleware' =>'auth:pediatric'], function () {
+
         Route::get('/pediatric', 'pediatricPhysicianController@index')->name('pediatric.dashboard');
         Route::get('pediatric_patient/{id}/show',['uses'=>'pediatricPhysicianController@show','as'=>'pediatric_patient.show']);
 
+        //--assign a pediatric medical info to a specific patient
+        Route::get('pediatric_patient/add_basic_info/{patient_id}/',['uses'=>'pediatricPhysicianController@basic_info','as'=>'add_basic_info']);
+        Route::post('add_basic_info/{patient_id}',['uses'=>'pediatricPhysicianController@store','as'=>'add_basic_info.store']);
     });
 
     
+
+
+
+
+
+
+
     Route::group(['middleware' =>'auth:orthopedic'], function () {
 
     Route::get('/orthopedic', 'orthopedicPhysicianController@index')->name('orthopedic.dashboard');

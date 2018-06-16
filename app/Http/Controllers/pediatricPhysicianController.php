@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Visit;
 use App\Patient;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class pediatricPhysicianController extends Controller
 {
@@ -66,7 +67,11 @@ class pediatricPhysicianController extends Controller
     {
         //
         $patient = Patient::findOrfail($id);
-        return view('physicians.pediatric.show')->withPatient($patient);
+        //pediatric clinic = 1 
+        //$clinicId = DB::table('clinic_patient')->where('clinic_id',1)->value('clinic_id');
+        //-pull the clinic id dynamically
+        $clinicId = Auth::user()->clinic_id;
+        return view('physicians.pediatric.show')->withPatient($patient)->withClinicId($clinicId);
     }
 
     /**
@@ -101,6 +106,14 @@ class pediatricPhysicianController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function basic_info($id){
+
+        $patient = Patient::findOrFail($id);
+        
+                   
+        return view('physicians.pediatric.basic_info')->withPatient($patient);
     }
 
 }
