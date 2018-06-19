@@ -20,4 +20,8 @@ class Patient extends Model
     public function visits(){
         return $this->hasMany('App\Visit');
     }
+
+    public function pediatric_basic_infos(){
+        return $this->hasOne('App\PediatricBasicInfo');
+    }
 }

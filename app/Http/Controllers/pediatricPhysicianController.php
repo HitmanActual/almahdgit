@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Visit;
 use App\Patient;
+use App\PediatricBasicInfo;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -52,9 +53,50 @@ class pediatricPhysicianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $patient_id)
     {
         //
+
+        $patient = Patient::find($patient_id);
+        $basicInfo = new PediatricBasicInfo();
+        $basicInfo->consanguinity = $request->consanguinity;
+        $basicInfo->occupation = $request->occupation;
+        $basicInfo->numberOfSiblings = $request->numberOfSiblings;
+        $basicInfo->age = $request->age;
+        $basicInfo->sex = $request->sex;
+        $basicInfo->similarCondition = $request->similarCondition;
+        $basicInfo->congenitalAnomalies = $request->congenitalAnomalies;
+        $basicInfo->allergy = $request->allergy;
+        $basicInfo->dm = $request->dm;
+        $basicInfo->dmOne = $request->dmOne;
+        $basicInfo->typeOfLabor = $request->typeOfLabor;
+        $basicInfo->medications = $request->medications;
+        $basicInfo->durationOfPregnancy = $request->durationOfPregnancy;
+        $basicInfo->jaundice = $request->jaundice;
+        $basicInfo->rd = $request->rd;
+        $basicInfo->birthWeight = $request->birthWeight;
+        $basicInfo->allergyOne = $request->allergyOne;
+        $basicInfo->operation = $request->operation;
+        $basicInfo->chronicalIllness = $request->chronicalIllness;
+        $basicInfo->trumaAndAccident = $request->trumaAndAccident;
+        $basicInfo->infection = $request->infection;
+        $basicInfo->typeOfFeeding = $request->typeOfFeeding;
+        $basicInfo->ironSup = $request->ironSup;
+        $basicInfo->nutrittionalDisorder = $request->nutrittionalDisorder;
+        $basicInfo->onsetOfweaning = $request->onsetOfweaning;
+        $basicInfo->vitDCaSupp = $request->vitDCaSupp;
+
+        $basicInfo->patient_id = $request->patient_id;
+
+        $basicInfo->patients()->associate($patient);
+
+        $basicInfo->save();
+
+        //Session::flash('add_visit_success','a visit has been added successfully');
+        //return redirect()->route('patients.show',$patient->id);
+
+
+        
     }
 
     /**

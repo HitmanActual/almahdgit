@@ -135,6 +135,34 @@
                     {{ Form::text('infection',null, ['class' => 'form-control']) }}
             </div>
 
+            <h5 class="bg-light text-dark">Nutritional History</h5>
+
+            <div class="form-group">
+                {{Form::label('typeOfFeeding', 'Type Of Feeding')}}
+                {{ Form::text('typeOfFeeding',null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('ironSup', 'Iron Sup')}}
+                {{ Form::text('ironSup',null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('nutrittionalDisorder', 'Nutrittional Disorder')}}
+                {{ Form::text('nutrittionalDisorder',null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('onsetOfweaning', 'Onset Of weaning')}}
+                {{ Form::text('onsetOfweaning',null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
+                {{Form::label('vitDCaSupp', 'Vit D Ca Supp')}}
+                {{ Form::text('vitDCaSupp',null, ['class' => 'form-control']) }}
+            </div>
+        
+
             {{Form::submit('Save Basic Information',['class'=>'btn btn-success btn-lg btn-block'])}}
 
             {{Form::close()}}
