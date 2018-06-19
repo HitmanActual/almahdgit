@@ -21,6 +21,7 @@
             <p class="lead"><strong>Notes: </strong>{{$patient->notes}}</p>
         </div>
         <hr>
+        @if($patient->pediatric_basic_infos != null)
         <h4 class="text-center text-info">Family History</h4>
         <h5><u>Parents</u></h5>   
         <p><strong>consanguinity : </strong>{{$patient->pediatric_basic_infos->consanguinity}}</p>
@@ -65,9 +66,7 @@
         <p><strong>Onset Of weaning : </strong>{{$patient->pediatric_basic_infos->onsetOfweaning}}</p>
         <p><strong>Vit D Ca Supp : </strong>{{$patient->pediatric_basic_infos->vitDCaSupp}}</p>
 
-
-
-
+        @endif
 
     </div>
 
@@ -79,18 +78,17 @@
                         
                         @if($patient->image)
                         <a href="/docs/{{$patient->id}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
-                        @else
-                        <p>Nothing to be downloaded</p>
+                        @elseif($patient->pediatric_basic_infos == null)
+                        <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Basic Information</a>
                         @endif
                     </div>
             </div>
+            
             <hr>
             <div class="row">
                 <div class="col-md-12">
                 <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Visit Details & Prescription</a>
                 </div>
-                
-
             </div>
         </div>
     </div>

@@ -30,10 +30,11 @@ class pediatricPhysicianController extends Controller
     {
           //get the clinic id of the authinticated doctor
           $clinicId = Auth::user()->clinic_id;
+          $basicInfo = PediatricBasicInfo::all();
 
           $visits = Visit::where('clinic_id',$clinicId)->orderBy('created_at','desc')->get();
 
-          return view('pediatric_physician')->withVisits($visits);
+          return view('pediatric_physician')->withVisits($visits)->withBasicInfo($basicInfo);
         
     }
 

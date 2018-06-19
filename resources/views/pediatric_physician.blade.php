@@ -31,9 +31,7 @@
                                 <th>Patient</th>
                                                
                                 <th>نوع الكشف</th>  
-                                                                              
-                                
-                                <th>Medical History</th>
+                                <th>Details</th>
                                 
                                 
                             </thead>
@@ -44,23 +42,16 @@
                                     <tr>
                                     <td>{{ \Carbon\Carbon::parse($visit->created_at)->format('d/m/Y')}}</td> 
                                     <td>{{$visit->clinics->clinicName}}</td>
-                                    <td><a href="{{route('pediatric_patient.show',$visit->patients->id)}}"}> {{$visit->patients->patientName}}</a></td>
+                                    <td>{{$visit->patients->patientName}}</td>
                                     <td>{{$visit->visitTypes->visitName}}</td>
-                                    <td>
 
-                                        @if($visit->patients->image)
-                                        <a href="/docs/{{$visit->patients->id}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
-                                        @else
-                                        <a href="{{route('add_basic_info',$visit->patients->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Basic Information</a>
-
-                                        @endif
-                                    </td>
+                                    <td><a href="{{route('pediatric_patient.show',$visit->patients->id)}}" class="btn btn-outline-dark btn-block"}>Details</a></td>
                                     </tr> 
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
