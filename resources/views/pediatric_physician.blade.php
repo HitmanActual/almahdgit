@@ -28,12 +28,9 @@
                             <thead>
                                 <th>Created at</th>
                                 <th>Clinic</th>
-                                <th>Patient</th>
-                                               
+                                <th>Patient</th>                                              
                                 <th>نوع الكشف</th>  
-                                <th>Details</th>
-                                
-                                
+                                <th>Details</th>                               
                             </thead>
                             <tbody>
                                 

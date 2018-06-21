@@ -87,7 +87,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-12">
-                <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Visit Details & Prescription</a>
+                    <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Visit Details & Prescription</a>
                 </div>
             </div>
         </div>
