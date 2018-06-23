@@ -121,8 +121,8 @@ class patientsController extends Controller
         $counter = 0;
         $patient = Patient::findOrFail($id);
         //--visit history
-        $visits = Visit::where('patients_id',$id)->orderBy('id', 'desc')->get();
-        $counter = Visit::where('patients_id',$id)->count();
+        $visits = Visit::withTrashed()->where('patients_id',$id)->orderBy('id', 'desc')->get();
+        $counter = Visit::withTrashed()->where('patients_id',$id)->count();
         
 
         return view('patients.show')->withPatient($patient)

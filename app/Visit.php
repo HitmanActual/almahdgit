@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Visit extends Model
 {
+    use SoftDeletes;
+    
     //
+    protected $table = 'visits';
         //mass assignment
         protected $fillable = [
             'clinic_id','patient_id','visitType_id','price','doctor_id','image',

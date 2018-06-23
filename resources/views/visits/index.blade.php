@@ -48,6 +48,8 @@
                     <td><a href="{{route('visits.show',$visit->id)}}" class="btn btn-xs btn-outline-dark"><span class="fa fa-eye"></span></a></td>                       
                     </tr> 
                 @endforeach
+
+                
             </tbody>
         </table>
     </div>

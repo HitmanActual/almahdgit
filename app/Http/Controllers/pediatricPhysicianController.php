@@ -95,6 +95,7 @@ class pediatricPhysicianController extends Controller
 
         //Session::flash('add_visit_success','a visit has been added successfully');
         //return redirect()->route('patients.show',$patient->id);
+        return view('physicians.pediatric.show')->withPatient($patient);
 
 
         
@@ -157,6 +158,13 @@ class pediatricPhysicianController extends Controller
         
                    
         return view('physicians.pediatric.basic_info')->withPatient($patient);
+    }
+
+    public function archive($id){
+        $visit = Visit::findOrFail($id);
+        $visit->delete();
+        return redirect()->route('pediatric.dashboard');
+
     }
 
 }

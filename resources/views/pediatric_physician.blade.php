@@ -31,6 +31,7 @@
                                 <th>Patient</th>                                              
                                 <th>نوع الكشف</th>  
                                 <th>Details</th>                               
+                                <th>Archive</th>                               
                             </thead>
                             <tbody>
                                 
@@ -43,6 +44,7 @@
                                     <td>{{$visit->visitTypes->visitName}}</td>
 
                                     <td><a href="{{route('pediatric_patient.show',$visit->patients->id)}}" class="btn btn-outline-dark btn-block"}>Details</a></td>
+                                    <td><a href="{{route('pediatric_patient.archive',$visit->id)}}" class="btn btn-outline-success btn-block"}>Archive</a></td>
                                     </tr> 
                                 @endforeach
                             </tbody>
