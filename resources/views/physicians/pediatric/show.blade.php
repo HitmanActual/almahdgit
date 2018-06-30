@@ -87,7 +87,11 @@
             <hr>
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Visit Details & Prescription</a>
+                    @if($patient->pediatric_basic_infos != null)
+                        <a href="{{route('edit_basic_info',$patient->pediatric_basic_infos->id)}}" class="btn btn-warning btn-block"><span class="fa fa-edit"></span> Edit Patient's History</a>
+                        <hr>
+                    @endif
+                    <a href="{{route('prescription',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Prescription</a>
                 </div>
             </div>
         </div>

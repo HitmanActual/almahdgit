@@ -88,11 +88,16 @@ Route::prefix('physician')->group(function(){
 
         //--assign a pediatric medical info to a specific patient
         Route::get('pediatric_patient/add_basic_info/{patient_id}/',['uses'=>'pediatricPhysicianController@basic_info','as'=>'add_basic_info']);
+        Route::get('pediatric_patient/basic_info/{id}/edit',['uses'=>'pediatricPhysicianController@edit','as'=>'edit_basic_info']);
+        Route::put('pediatric_patient/{id}',['uses'=>'pediatricPhysicianController@update','as'=>'edit_basic_info.update']);
         Route::post('add_basic_info/{patient_id}',['uses'=>'pediatricPhysicianController@store','as'=>'add_basic_info.store']);
         
         //-archiving visits!
         Route::get('pediatric_patient/{id}/archive',['uses'=>'pediatricPhysicianController@archive','as'=>'pediatric_patient.archive']);
 
+        //-- assign pediatric prescription to a patient
+        Route::get('pediatric/patient/{patient_id}/prescription',['uses'=>'PrescriptionController@patient_prescription','as'=>'prescription']);
+        Route::post('pediatricPrescription/{patient_id}',['uses'=>'PrescriptionController@store','as'=>'pediatricPrescription.store']);
    
     });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Visit;
 use App\Patient;
+use App\Clinic;
 use App\PediatricBasicInfo;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -127,6 +128,8 @@ class pediatricPhysicianController extends Controller
     public function edit($id)
     {
         //
+        $pediatricBasicInfo = PediatricBasicInfo::findOrfail($id);
+        return view('physicians.pediatric.edit')->withPediatricBasicInfo($pediatricBasicInfo);
     }
 
     /**
@@ -139,6 +142,44 @@ class pediatricPhysicianController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
+        $basicInfo = PediatricBasicInfo::findOrfail($id);
+        $patient = Patient::findOrFail($basicInfo->patient_id);
+        $basicInfo->consanguinity = $request->consanguinity;
+        $basicInfo->occupation = $request->occupation;
+        $basicInfo->numberOfSiblings = $request->numberOfSiblings;
+        $basicInfo->age = $request->age;
+        $basicInfo->sex = $request->sex;
+        $basicInfo->similarCondition = $request->similarCondition;
+        $basicInfo->congenitalAnomalies = $request->congenitalAnomalies;
+        $basicInfo->allergy = $request->allergy;
+        $basicInfo->dm = $request->dm;
+        $basicInfo->dmOne = $request->dmOne;
+        $basicInfo->typeOfLabor = $request->typeOfLabor;
+        $basicInfo->medications = $request->medications;
+        $basicInfo->durationOfPregnancy = $request->durationOfPregnancy;
+        $basicInfo->jaundice = $request->jaundice;
+        $basicInfo->rd = $request->rd;
+        $basicInfo->birthWeight = $request->birthWeight;
+        $basicInfo->allergyOne = $request->allergyOne;
+        $basicInfo->operation = $request->operation;
+        $basicInfo->chronicalIllness = $request->chronicalIllness;
+        $basicInfo->trumaAndAccident = $request->trumaAndAccident;
+        $basicInfo->infection = $request->infection;
+        $basicInfo->typeOfFeeding = $request->typeOfFeeding;
+        $basicInfo->ironSup = $request->ironSup;
+        $basicInfo->nutrittionalDisorder = $request->nutrittionalDisorder;
+        $basicInfo->onsetOfweaning = $request->onsetOfweaning;
+        $basicInfo->vitDCaSupp = $request->vitDCaSupp;
+
+       
+
+        $basicInfo->save();
+        return view('physicians.pediatric.show')->withPatient($patient);
+
+     
+
+
     }
 
     /**
@@ -166,5 +207,7 @@ class pediatricPhysicianController extends Controller
         return redirect()->route('pediatric.dashboard');
 
     }
+
+   
 
 }
