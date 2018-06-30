@@ -96,8 +96,9 @@ Route::prefix('physician')->group(function(){
         Route::get('pediatric_patient/{id}/archive',['uses'=>'pediatricPhysicianController@archive','as'=>'pediatric_patient.archive']);
 
         //-- assign pediatric prescription to a patient
-        Route::get('pediatric/patient/{patient_id}/prescription',['uses'=>'PrescriptionController@patient_prescription','as'=>'prescription']);
-        Route::post('pediatricPrescription/{patient_id}',['uses'=>'PrescriptionController@store','as'=>'pediatricPrescription.store']);
+        Route::get('pediatric/patient/{patient_id}/prescription',['uses'=>'PediatricPrescriptionController@patient_prescription','as'=>'prescription']);
+        Route::post('pediatricPrescription/{patient_id}',['uses'=>'PediatricPrescriptionController@store','as'=>'pediatricPrescription.store']);
+        Route::get('patient/prescriptions/{patient_id}',['uses'=>'PediatricPrescriptionController@patient_displayPrescription','as'=>'pediatricPrescription.display']);
    
     });
 

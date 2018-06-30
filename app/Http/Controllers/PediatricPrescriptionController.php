@@ -10,7 +10,7 @@ use App\Prescription;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
-class PrescriptionController extends Controller
+class PediatricPrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -102,10 +102,16 @@ class PrescriptionController extends Controller
 
     public function patient_prescription($patient_id){
 
-        
-
         $patient = Patient::findOrFail($patient_id);  
         return view('physicians.pediatric.pediatricPrescription')->withPatient($patient);
+    }
+
+    public function patient_displayPrescription($id){
+
+        $patient = Patient::findOrFail($id);
+        $prescriptions = Prescription::all();
+                   
+        return view('physicians.pediatric.displayPrescriptions')->withPatient($patient)->withPrescriptions($prescriptions);
     }
 
 

@@ -95,6 +95,10 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="card card-body bg-light">
+        <a href="{{route('pediatricPrescription.display',$patient->id)}}">Display Prescriptions</a>
+        </div>
     </div>
     
 </div>
