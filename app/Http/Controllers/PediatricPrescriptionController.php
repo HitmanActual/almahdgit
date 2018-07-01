@@ -64,6 +64,8 @@ class PediatricPrescriptionController extends Controller
     public function show($id)
     {
         //
+        $prescription = Prescription::findOrFail($id);
+        return view('physicians.pediatric.singlePrescription')->withPrescription($prescription);
     }
 
     /**
@@ -109,7 +111,7 @@ class PediatricPrescriptionController extends Controller
     public function patient_displayPrescription($id){
 
         $patient = Patient::findOrFail($id);
-        $prescriptions = Prescription::all();
+        $prescriptions = Prescription::where('clinic_id',1)->orderBy('created_at','desc')->get();
                    
         return view('physicians.pediatric.displayPrescriptions')->withPatient($patient)->withPrescriptions($prescriptions);
     }

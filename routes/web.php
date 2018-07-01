@@ -99,7 +99,8 @@ Route::prefix('physician')->group(function(){
         Route::get('pediatric/patient/{patient_id}/prescription',['uses'=>'PediatricPrescriptionController@patient_prescription','as'=>'prescription']);
         Route::post('pediatricPrescription/{patient_id}',['uses'=>'PediatricPrescriptionController@store','as'=>'pediatricPrescription.store']);
         Route::get('patient/prescriptions/{patient_id}',['uses'=>'PediatricPrescriptionController@patient_displayPrescription','as'=>'pediatricPrescription.display']);
-   
+        Route::get('patient/prescription/{id}/show',['uses'=>'PediatricPrescriptionController@show','as'=>'single.show']);
+
     });
 
     

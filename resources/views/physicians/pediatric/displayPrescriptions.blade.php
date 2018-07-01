@@ -22,7 +22,14 @@
         </div>
 
         <hr>
+        <h6 class="text-center">Prescriptions</h6>
         @foreach($prescriptions as $prescription)
-           <p> {{$prescription->prescriptionName}}</p>
+        <div class="card card-body bg-light">
+           <p><strong>{{$prescription->prescriptionName}}</strong></p>
+           <p class="text-right"><small>written by Dr. : {{$prescription->responsible}}</small></p>
+           <p class="text-right"><small>Date : {{ \Carbon\Carbon::parse($prescription->created_at)->format('d/m/Y')}}</small></p>
+           <a href="{{route('single.show',$prescription->id)}}" class="btn btn-outline-primary btn-block"><span class="fa fa-newspaper-o"></span> Details</a>
+
+        </div>
         @endforeach
 @endsection
