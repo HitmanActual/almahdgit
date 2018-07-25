@@ -85,6 +85,15 @@
             </div>
             
             <hr>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{route('pediatric_visit',$patient->id)}}" class="btn btn-primary btn-block"><span class="fa fa-medkit"></span> Add New Visit </a>
+                </div>
+            </div>
+
+            <hr>
+
             <div class="row">
                 <div class="col-md-12">
                     @if($patient->pediatric_basic_infos != null)
@@ -94,6 +103,8 @@
                     <a href="{{route('prescription',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Prescription</a>
                 </div>
             </div>
+
+            
         </div>
         <hr>
         <div class="card card-body bg-light">
