@@ -109,7 +109,10 @@
         <hr>
         <div class="card card-body bg-light">
         <a href="{{route('pediatricPrescription.display',$patient->id)}}" class="btn btn-info btn-block">Display Prescriptions</a>
+            <hr>
+        <a href="{{route('visit_history',$patient->id)}}" class="btn btn-outline-primary">Display Visit History</a>
         </div>
+
     </div>
     
 </div>

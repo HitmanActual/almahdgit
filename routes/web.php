@@ -104,6 +104,7 @@ Route::prefix('physician')->group(function(){
         //--assign pediatric visit to patient
         Route::get('pediatric/patient/{patient_id}/add_doctor_visit',['uses'=>'DoctorVisitController@pediatric_visit','as'=>'pediatric_visit']);
         Route::post('pediatricVisit/{patient_id}',['uses'=>'DoctorVisitController@store','as'=>'pediatricVisit.store']);
+        Route::get('patient/visit_history/{id}',['uses'=>'DoctorVisitController@patient_displayDoctorVisit','as'=>'visit_history']);
 
 
     });

@@ -20,16 +20,15 @@
             <p class="lead"><strong>Address: </strong>{{$patient->patientAddress}}</p>
             <p class="lead"><strong>Notes: </strong>{{$patient->notes}}</p>
         </div>
+
         <hr>
-        
-        
-        {!! Form::open(['route' => ['pediatricPrescription.store',$patient->id],'data-parsley-validate'=>'']) !!}
-
-        <div class="form-group">
-        {{Form::label('prescriptionName', 'Prescription')}}
-        {{ Form::textarea('prescriptionName',null, ['class' => 'form-control']) }}
+        <h6 class="text-center">History Visit</h6>
+        @foreach($doctorVisits as $doctorVisit)
+        <div class="card card-body bg-light">
+           <p><strong>head circumference : {{$doctorVisit->head_circumference}}</strong></p>
+           <p class="text-right"><small>written by Dr. : {{$doctorVisit->weight}}</small></p>
+           <p class="text-right"><small>Date : {{ \Carbon\Carbon::parse($doctorVisit->created_at)->format('d/m/Y')}}</small></p>
         </div>
-        {{Form::submit('Save Prescription',['class'=>'btn btn-success btn-lg btn-block'])}}
-        {!!Form::close()!!}
-
+        <div style="margin-bottom:20px;"></div>
+        @endforeach
 @endsection

@@ -65,7 +65,7 @@ class DoctorVisitController extends Controller
         $doctorVisit->ttt = $request->ttt;
         $doctorVisit->patients()->associate($patient);
         $doctorVisit->save();
-        
+        return view('physicians.pediatric.show')->withPatient($patient);
         
 
     }
@@ -76,7 +76,7 @@ class DoctorVisitController extends Controller
      * @param  \App\DoctorVisit  $doctorVisit
      * @return \Illuminate\Http\Response
      */
-    public function show(DoctorVisit $doctorVisit)
+    public function show(DoctorVisit $id)
     {
         //
     }
@@ -115,9 +115,23 @@ class DoctorVisitController extends Controller
         //
     }
 
+    //---add doctor visit--
     public function pediatric_visit($patient_id){
 
         $patient = Patient::findOrFail($patient_id);  
         return view('physicians.pediatric.pediatricDoctorVisit')->withPatient($patient);
     }
+
+    //--display all doctor visits
+
+    public function patient_displayDoctorVisit($id){
+
+        $patient = Patient::findOrFail($id);
+        $doctorVisits = DoctorVisit::where('clinic_id',1)->orderBy('created_at','desc')->get();
+                   
+        return view('physicians.pediatric.displayVisitHistory')->withDoctorVisits($doctorVisits)->withPatient($patient);
+
+    }
+
+    
 }
