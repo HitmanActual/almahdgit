@@ -33,4 +33,9 @@ class Patient extends Model
     public function pediatric_doctor_visit(){
         return $this->hasMany('App\DoctorVisit');
     }
+
+
+    public function orthopedic_visits(){
+        return $this->hasMany('App\OrthopedicVisit');
+    }
 }

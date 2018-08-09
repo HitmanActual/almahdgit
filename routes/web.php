@@ -109,17 +109,16 @@ Route::prefix('physician')->group(function(){
 
     });
 
-    
-
-
-
-
-
-
-
+    //--orthopic doctors interface
     Route::group(['middleware' =>'auth:orthopedic'], function () {
 
     Route::get('/orthopedic', 'orthopedicPhysicianController@index')->name('orthopedic.dashboard');
+    Route::get('orthopedic_patient/{id}/show',['uses'=>'orthopedicPhysicianController@show','as'=>'orthopedic_patient.show']);
+    Route::get('orthopedic_patient/{id}/archive',['uses'=>'orthopedicPhysicianController@archive','as'=>'orthopedic_patient.archive']);
+    Route::get('orthopedic/patient/{patient_id}/add_doctor_visit',['uses'=>'OrthopedicVisitController@orthopedic_visit','as'=>'orthopedic_visit']);
+    Route::post('orthopedicVisit/{patient_id}',['uses'=>'OrthopedicVisitController@store','as'=>'orthopedicVisit.store']);
+
+
     });
 });
 
