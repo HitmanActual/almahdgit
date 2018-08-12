@@ -21,6 +21,9 @@ class OrthopedicVisitController extends Controller
     public function index()
     {
         //
+        $orthoVisits = OrthopedicVisit::all();
+        return redirect('physician/orthopedic_patient/'.$patient_id.'/show')->withOrthoVisits($orthoVisits);
+        
     }
 
     /**
@@ -57,7 +60,7 @@ class OrthopedicVisitController extends Controller
         $orthopedicVisit->diagnosis = $request->diagnosis;
         $orthopedicVisit->patients()->associate($patient);
         $orthopedicVisit->save();
-        return view('physicians.orthopedic.show')->withPatient($patient);
+        return redirect('physician/orthopedic_patient/'.$patient_id.'/show');
 
     }
 
@@ -70,6 +73,8 @@ class OrthopedicVisitController extends Controller
     public function show(OrthopedicVisit $orthopedicVisit)
     {
         //
+
+        return view('physicians.orthopedic.singleVisit');
     }
 
     /**
@@ -110,5 +115,13 @@ class OrthopedicVisitController extends Controller
 
         $patient = Patient::findOrFail($patient_id);  
         return view('physicians.orthopedic.orthopedicDoctorVisit')->withPatient($patient);
+    }
+
+    public function patient_displayVisits($id){
+
+        $patient = Patient::findOrFail($id);
+        $orthopedicVisits = OrthopedicVisit::where('clinic_id',2)->orderBy('created_at','desc')->get();
+                   
+        return view('physicians.orthopedic.show')->withPatient($patient)->withOrthopedicVisits($orthopedicVisits);
     }
 }

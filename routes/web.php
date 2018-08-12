@@ -117,6 +117,8 @@ Route::prefix('physician')->group(function(){
     Route::get('orthopedic_patient/{id}/archive',['uses'=>'orthopedicPhysicianController@archive','as'=>'orthopedic_patient.archive']);
     Route::get('orthopedic/patient/{patient_id}/add_doctor_visit',['uses'=>'OrthopedicVisitController@orthopedic_visit','as'=>'orthopedic_visit']);
     Route::post('orthopedicVisit/{patient_id}',['uses'=>'OrthopedicVisitController@store','as'=>'orthopedicVisit.store']);
+    Route::get('orthopedic_patient/{id}/show_visit',['uses'=>'OrthopedicVisitController@show','as'=>'orthopedic_visit.show']);
+
 
 
     });

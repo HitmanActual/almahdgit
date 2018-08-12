@@ -20,8 +20,26 @@
             <p class="lead"><strong>Address: </strong>{{$patient->patientAddress}}</p>
             <p class="lead"><strong>Notes: </strong>{{$patient->notes}}</p>
         </div>
-        <hr>
+<hr>
+
         
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">Visits</h3>
+
+        
+                @foreach ($orthoVisits as $visit)
+                <div class="card card-body bg-light mb-2">                   
+                    <p>{{$visit->created_at->diffForHumans()}}</p>
+                    <p>{!!Html::linkRoute('orthopedic_visit.show','Details',[$visit->id],['class'=>'btn btn-outline-info btn-block'])!!}</p>
+                </div>
+                @endforeach
+
+    </div>
+    
+</div>
+
+
 
     </div>
 
@@ -32,9 +50,8 @@
                         <div class="col-md-12">
 
                                 <a href="{{route('orthopedic_visit',$patient->id)}}" class="btn btn-primary btn-block"><span class="fa fa-medkit"></span> Add New Visit </a>
-
                         </div>
-                    </div>
+                </div>
             </div>
         </div>
 </div>
