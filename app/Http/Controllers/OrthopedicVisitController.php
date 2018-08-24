@@ -70,11 +70,13 @@ class OrthopedicVisitController extends Controller
      * @param  \App\OrthopedicVisit  $orthopedicVisit
      * @return \Illuminate\Http\Response
      */
-    public function show(OrthopedicVisit $orthopedicVisit)
+    public function show($id)
     {
         //
+        $visit = OrthopedicVisit::findOrFail($id);
+        $test = $visit->doctors->doctorName;
 
-        return view('physicians.orthopedic.singleVisit');
+        return view('physicians.orthopedic.singleVisit')->withVisit($visit)->withTest($test);
     }
 
     /**

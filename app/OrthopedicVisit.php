@@ -17,4 +17,8 @@ class OrthopedicVisit extends Model
     public function patients(){
         return $this->belongsTo('App\Patient','patient_id');
    }
+
+   public function doctors(){
+    return $this->belongsTo('App\Doctor','doctor_id');
+}
 }
