@@ -7,6 +7,7 @@
 @section('content')
 
 <div class="mt-5"></div>
+<h3 class="text-center">Visit Details</h3>
 <p> <strong>C/O : </strong></p>
 <p>{{$visit->co}}</p>
 
@@ -24,7 +25,7 @@
 
 <hr>
 
-<p><small>this visit by  {{$test}}</small></p>
-
+<p class="text-right"><small><strong> by {{$test}}<strong></small></p>
+<p class="text-right"><small>{{$visit->created_at->diffForHumans()}}</small></p>
 
 @endsection

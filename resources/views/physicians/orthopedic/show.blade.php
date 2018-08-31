@@ -48,7 +48,9 @@
                
                 <div class="row">
                         <div class="col-md-12">
-
+                            @if($patient->image)
+                            <a href="{{route('docxxx',$patient->id)}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
+                            @endif
                                 <a href="{{route('orthopedic_visit',$patient->id)}}" class="btn btn-primary btn-block"><span class="fa fa-medkit"></span> Add New Visit </a>
                         </div>
                 </div>

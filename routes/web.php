@@ -91,7 +91,7 @@ Route::prefix('physician')->group(function(){
         Route::get('pediatric_patient/basic_info/{id}/edit',['uses'=>'pediatricPhysicianController@edit','as'=>'edit_basic_info']);
         Route::put('pediatric_patient/{id}',['uses'=>'pediatricPhysicianController@update','as'=>'edit_basic_info.update']);
         Route::post('add_basic_info/{patient_id}',['uses'=>'pediatricPhysicianController@store','as'=>'add_basic_info.store']);
-        
+        Route::get('docx/{id}',['uses'=>'pediatricPhysicianController@docx','as'=>'docxx']);
         //-archiving visits!
         Route::get('pediatric_patient/{id}/archive',['uses'=>'pediatricPhysicianController@archive','as'=>'pediatric_patient.archive']);
 
@@ -105,7 +105,7 @@ Route::prefix('physician')->group(function(){
         Route::get('pediatric/patient/{patient_id}/add_doctor_visit',['uses'=>'DoctorVisitController@pediatric_visit','as'=>'pediatric_visit']);
         Route::post('pediatricVisit/{patient_id}',['uses'=>'DoctorVisitController@store','as'=>'pediatricVisit.store']);
         Route::get('patient/visit_history/{id}',['uses'=>'DoctorVisitController@patient_displayDoctorVisit','as'=>'visit_history']);
-
+       
 
     });
 
@@ -118,7 +118,7 @@ Route::prefix('physician')->group(function(){
     Route::get('orthopedic/patient/{patient_id}/add_doctor_visit',['uses'=>'OrthopedicVisitController@orthopedic_visit','as'=>'orthopedic_visit']);
     Route::post('orthopedicVisit/{patient_id}',['uses'=>'OrthopedicVisitController@store','as'=>'orthopedicVisit.store']);
     Route::get('orthopedic_patient/{id}/show_visit',['uses'=>'OrthopedicVisitController@show','as'=>'orthopedic_visit.show']);
-
+    Route::get('docxx/{id}',['uses'=>'orthopedicPhysicianController@docx','as'=>'docxxx']);
 
 
     });

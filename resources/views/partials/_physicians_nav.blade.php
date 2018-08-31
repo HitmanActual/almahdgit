@@ -11,7 +11,12 @@
 
                 @if(Auth::user()->clinic_id == 1)
                 <a class="nav-link" href="/physician/pediatric">Current Visits</a>
-                @endif                   
+                @endif     
+                
+                @if(Auth::user()->clinic_id == 2)
+                <a class="nav-link" href="/physician/orthopedic">Current Visits</a>
+                @endif 
+
             </li>      
         </ul>
         

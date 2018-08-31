@@ -53,4 +53,17 @@ class orthopedicPhysicianController extends Controller
 
         return view('physicians.orthopedic.show')->withPatient($patient)->withClinicId($clinicId)->withOrthoVisits($orthoVisits);
     }
+
+    public function archive($id){
+        $visit = Visit::findOrFail($id);
+        $visit->delete();
+        return redirect()->route('orthopedic.dashboard');
+
+    }
+
+    public function docx($id){
+        $patient = Patient::findOrFail($id);
+        return response()->download(storage_path('app/public/images/'.$patient->image,$patient));
+
+    }
 }

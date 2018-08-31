@@ -208,6 +208,12 @@ class pediatricPhysicianController extends Controller
 
     }
 
+    public function docx($id){
+        $patient = Patient::findOrFail($id);
+        return response()->download(storage_path('app/public/images/'.$patient->image,$patient));
+
+    }
+
    
 
 }

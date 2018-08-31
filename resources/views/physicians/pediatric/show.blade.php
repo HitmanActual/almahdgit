@@ -77,7 +77,7 @@
                     <div class="col-md-12">
                         
                         @if($patient->image)
-                        <a href="/docs/{{$patient->id}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
+                        <a href="{{route('docxx',$patient->id)}}" class="btn btn-outline-dark btn-block">Download Previous Patient's File</a>
                         @elseif($patient->pediatric_basic_infos == null)
                         <a href="{{route('add_basic_info',$patient->id)}}" class="btn btn-success btn-block"><span class="fa fa-medkit"></span> Add Basic Information</a>
                         @endif
