@@ -119,8 +119,16 @@ Route::prefix('physician')->group(function(){
     Route::post('orthopedicVisit/{patient_id}',['uses'=>'OrthopedicVisitController@store','as'=>'orthopedicVisit.store']);
     Route::get('orthopedic_patient/{id}/show_visit',['uses'=>'OrthopedicVisitController@show','as'=>'orthopedic_visit.show']);
     Route::get('docxx/{id}',['uses'=>'orthopedicPhysicianController@docx','as'=>'docxxx']);
+    });
+
+
+    //--derma
+    Route::group(['middleware' =>'auth:derma'], function () {
+
+        Route::get('/derma', 'dermaPhysicianController@index')->name('derma.dashboard');
 
 
     });
+
 });
 

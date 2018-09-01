@@ -31,6 +31,12 @@ class RedirectIfAuthenticated
             }
             break;
 
+            case 'derma':
+            if(Auth::guard($guard)->check()){
+                return redirect()->route('derma.dashboard');
+            }
+            break;
+
             default:
             if(Auth::guard($guard)->check()){
                 return redirect()->route('physician.login');

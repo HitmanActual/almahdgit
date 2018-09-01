@@ -17,6 +17,10 @@
                 <a class="nav-link" href="/physician/orthopedic">Current Visits</a>
                 @endif 
 
+                @if(Auth::user()->clinic_id == 3)
+                <a class="nav-link" href="/physician/derma">Current Visits</a>
+                @endif 
+
             </li>      
         </ul>
         

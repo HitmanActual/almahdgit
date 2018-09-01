@@ -34,12 +34,12 @@ class orthopedicPhysicianController extends Controller
 
          //get the clinic id of the authinticated doctor
          $clinicId = Auth::user()->clinic_id;
-         $basicInfo = PediatricBasicInfo::all();
+        
 
          $visits = Visit::where('clinic_id',$clinicId)->orderBy('created_at','desc')->get();
 
 
-        return view('orthopedic_physician')->withVisits($visits)->withBasicInfo($basicInfo);
+        return view('orthopedic_physician')->withVisits($visits);
     }
 
     public function show($id){

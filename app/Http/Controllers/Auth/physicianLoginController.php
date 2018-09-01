@@ -34,6 +34,10 @@ class physicianLoginController extends Controller
             //if susscess then redirect to the intended location
             return redirect()->intended(route('orthopedic.dashboard'));
         }
+        if(Auth::guard('derma')->attempt(['email'=>$request->email,'password'=>$request->password,'clinic_id'=>3],$request->remember)){
+            //if susscess then redirect to the intended location
+            return redirect()->intended(route('derma.dashboard'));
+        }
     
         //if unsussessfull redirect back
         return redirect()->back()->withInput($request->only('email','remember'));

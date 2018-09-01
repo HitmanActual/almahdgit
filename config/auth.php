@@ -49,6 +49,11 @@ return [
             'provider' => 'doctors',
         ],
 
+        'derma' => [
+            'driver' => 'session',
+            'provider' => 'doctors',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',

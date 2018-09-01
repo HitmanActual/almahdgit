@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in as Orthopedic Physician!
+                    You are logged in as Derma Physician!
                 </div>
                 <div class="row">
                     <div class="col-md-12 mt-5">
