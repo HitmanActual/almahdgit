@@ -2,34 +2,27 @@
 
 namespace App\Http\Controllers;
 
+
+
+use App\DermaVisit;
 use Illuminate\Http\Request;
 use App\Visit;
-use App\DermaVisit;
 use App\Patient;
 use App\Clinic;
+use App\DoctorVisit;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
-class dermaPhysicianController extends Controller
+class DermaVisitController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth:derma');
-    }
-
-
     public function index()
     {
-         //get the clinic id of the authinticated doctor
-         $clinicId = Auth::user()->clinic_id;
-         $visits = Visit::where('clinic_id',$clinicId)->orderBy('created_at','desc')->get();
-        return view('derma_physician')->withVisits($visits);
+        //
     }
 
     /**
@@ -48,9 +41,22 @@ class dermaPhysicianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$patient_id)
     {
         //
+        $patient = Patient::find($patient_id);
+        $clinic_id = Auth::user()->clinic_id;
+
+        $dermaVisit = new DermaVisit();
+        $dermaVisit->patient_id = $request->patient_id;
+        $dermaVisit->clinic_id = $clinic_id;
+        $dermaVisit->doctor_id = Auth::user()->id;
+
+        $dermaVisit->allergy = $request->allergy;
+        $dermaVisit->diagnosis = $request->diagnosis;
+        $dermaVisit->patients()->associate($patient);
+        $dermaVisit->save();
+        return redirect('physician/derma_patient/'.$patient_id.'/show');
     }
 
     /**
@@ -62,14 +68,10 @@ class dermaPhysicianController extends Controller
     public function show($id)
     {
         //
-        $patient = Patient::findOrfail($id);
-        //pediatric clinic = 1 
-        //$clinicId = DB::table('clinic_patient')->where('clinic_id',1)->value('clinic_id');
-        //-pull the clinic id dynamically
-        $clinicId = Auth::user()->clinic_id;
-        $orthoVisits = DermaVisit::orderBy('created_at','desc')->get();
+        $visit = DermaVisit::findOrFail($id);
+        $test = $visit->doctors->doctorName;
 
-        return view('physicians.derma.show')->withPatient($patient)->withClinicId($clinicId)->withOrthoVisits($orthoVisits);
+        return view('physicians.derma.singleVisit')->withVisit($visit)->withTest($test);
     }
 
     /**
@@ -106,18 +108,17 @@ class dermaPhysicianController extends Controller
         //
     }
 
-    public function archive($id){
-        $visit = Visit::findOrFail($id);
-        $visit->delete();
-        return redirect()->route('derma.dashboard');
+    public function derma_visit($patient_id){
 
+        $patient = Patient::findOrFail($patient_id);  
+        return view('physicians.derma.dermaDoctorVisit')->withPatient($patient);
     }
 
-    public function docx($id){
+    public function patient_displayVisits($id){
+
         $patient = Patient::findOrFail($id);
-        return response()->download(storage_path('app/public/images/'.$patient->image,$patient));
-
+        $dermaVisits = DermaVisit::where('clinic_id',2)->orderBy('created_at','desc')->get();
+                   
+        return view('physicians.derma.show')->withPatient($patient)->withDermaVisits($dermaVisits);
     }
-
-
 }

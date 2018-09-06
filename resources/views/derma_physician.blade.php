@@ -37,8 +37,8 @@
                                     <td>{{$visit->patients->patientName}}</td>
                                     <td>{{$visit->visitTypes->visitName}}</td>
 
-                                    <td><a href="{{route('orthopedic_patient.show',$visit->patients->id)}}" class="btn btn-outline-dark btn-block"}>Details</a></td>
-                                    <td><a href="{{route('orthopedic_patient.archive',$visit->id)}}" class="btn btn-outline-success btn-block"}>Archive</a></td>
+                                    <td><a href="{{route('derma_patient.show',$visit->patients->id)}}" class="btn btn-outline-dark btn-block"}>Details</a></td>
+                                    <td><a href="{{route('derma_patient.archive',$visit->id)}}" class="btn btn-outline-success btn-block"}>Archive</a></td>
                                     </tr> 
                                 @endforeach
                             </tbody>

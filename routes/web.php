@@ -126,6 +126,13 @@ Route::prefix('physician')->group(function(){
     Route::group(['middleware' =>'auth:derma'], function () {
 
         Route::get('/derma', 'dermaPhysicianController@index')->name('derma.dashboard');
+        Route::get('derma_patient/{id}/show',['uses'=>'dermaPhysicianController@show','as'=>'derma_patient.show']);
+        Route::get('derma_patient/{id}/archive',['uses'=>'dermaPhysicianController@archive','as'=>'derma_patient.archive']);       
+        Route::get('derma/patient/{patient_id}/add_doctor_visit',['uses'=>'DermaVisitController@derma_visit','as'=>'derma_visit']);
+        Route::post('dermaVisit/{patient_id}',['uses'=>'DermaVisitController@store','as'=>'dermaVisit.store']);
+        Route::get('derma_patient/{id}/show_visit',['uses'=>'DermaVisitController@show','as'=>'derma_visit.show']);
+        Route::get('docxxx/{id}',['uses'=>'dermaPhysicianController@docx','as'=>'docxxxx']);
+
 
 
     });
